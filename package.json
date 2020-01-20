@@ -15,7 +15,7 @@
         "watch-node": "nodemon dist/server.js",
         "watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run watch-node\"",
         "integration-test": "npx jest --forceExit --config=jest.integration.config.js",
-        "test": "npx jest --forceExit --coverage --verbose",
+        "test": "jest --forceExit --coverage --verbose",
         "watch-test": "npx jest --forceExit --coverage --verbose --watch",
         "watch-test-noCoverage": "npx jest --forceExit --verbose --watch",
         "build-ts": "tsc",
@@ -26,7 +26,9 @@
         "copy-static-assets": "ts-node copyStaticAssets.ts",
         "debug": "npm run build && npm run watch-debug",
         "serve-debug": "nodemon --inspect dist/server.js",
-        "watch-debug": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve-debug\""
+        "watch-debug": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve-debug\"",
+        "test:ci": "jest --forceExit --coverage --verbose",
+        "tslint:ci": "tslint -t json -o coverage/linter-report.json --project . --force"
     },
     "dependencies": {
         "async": "^3.1.0",
@@ -34,7 +36,6 @@
         "bluebird": "^3.5.5",
         "body-parser": "^1.19.0",
         "compression": "^1.7.4",
-        "connect-mongo": "^3.0.0",
         "dotenv": "^8.2.0",
         "errorhandler": "^1.5.1",
         "express": "^4.17.1",
@@ -44,7 +45,6 @@
         "fbgraph": "^1.4.4",
         "lodash": "^4.17.15",
         "lusca": "^1.6.1",
-        "mongoose": "^5.7.1",
         "nodemailer": "^6.3.0",
         "passport": "^0.4.0",
         "passport-facebook": "^3.0.0",
@@ -62,7 +62,6 @@
         "@types/chai": "^4.2.3",
         "@types/compression": "^1.0.1",
         "@types/concurrently": "^4.1.0",
-        "@types/connect-mongo": "^3.0.0",
         "@types/errorhandler": "^0.0.32",
         "@types/eslint": "^6.1.1",
         "@types/express": "^4.17.1",
@@ -72,7 +71,6 @@
         "@types/jquery": "^3.3.31",
         "@types/lodash": "^4.14.141",
         "@types/lusca": "^1.6.1",
-        "@types/mongoose": "^5.5.18",
         "@types/node": "^12.7.8",
         "@types/node-sass": "^4.11.0",
         "@types/nodemailer": "^6.2.1",
@@ -91,12 +89,23 @@
         "concurrently": "^5.0.0",
         "eslint": "^6.4.0",
         "jest": "^24.9.0",
+        "jest-sonar-reporter": "^2.0.0",
         "node-sass": "^4.13.0",
         "nodemon": "^1.19.2",
         "shelljs": "^0.8.3",
+        "sonarqube-scanner": "^2.5.0",
         "supertest": "^4.0.2",
         "ts-jest": "^24.1.0",
         "ts-node": "^8.4.1",
+        "tslint": "^5.20.1",
         "typescript": "^3.6.3"
+    },
+    "jest": {
+        "testResultsProcessor": "jest-sonar-reporter"
+    },
+    "jestSonar": {
+        "reportPath": "coverage/sonarqube",
+        "reportFile": "report.xml",
+        "indent": 4
     }
 }
