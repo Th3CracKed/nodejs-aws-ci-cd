@@ -20,7 +20,6 @@ phases:
       - "aws s3 sync s3://codebuild-us-east-angular-front-dev/coverage/backend/lcov-report/ s3://codebuild-us-east-angular-front-dev/coverage/backend --acl=public-read --exclude 'backups/*|aws/*|sonarqube/*|linter/*|lcov.info' && aws s3 rm s3://codebuild-us-east-angular-front-dev/coverage/backend/lcov-report/ --recursive"
       - NOW=$(date +"%Y-%m-%d-%T")
       - "aws s3 cp s3://codebuild-us-east-angular-front-dev/coverage/backend/ s3://codebuild-us-east-angular-front-dev/coverage/backend/backups/$NOW --recursive --exclude 'backups'"
-      - "[ -d ./dist ] && echo 'dist directory found' &&  aws s3 sync ./dist s3://codebuild-us-east-angular-front-dev --acl=public-read --exclude '.git/*|.coverage/backend/*'"
       - npm run tslint:ci
       - node sonarqube-scan.js
       - echo Build completed on `date`
@@ -31,7 +30,7 @@ reports: #New
   CoverageReports: # CodeBuild will create a report group called "CoverageReports".
     files: #Store all of the files
       - "**/*"
-    base-directory: "coverage/aws" # Location of the reports
+    base-directory: "coverage/sonarqube" # Location of the reports
 artifacts:
   files:
     - "dist/**/*"
