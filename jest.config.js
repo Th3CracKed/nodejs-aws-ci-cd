@@ -16,4 +16,10 @@ module.exports = {
     ],
     testEnvironment: "node",
     testResultsProcessor: "jest-sonar-reporter",
+    reporters: ["default",
+    ["jest-junit", {
+        outputDirectory: "./coverage/aws",
+        outputName: "reports.xml"}
+    ]
+    ]
 };
