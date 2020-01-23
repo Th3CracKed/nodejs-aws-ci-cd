@@ -23,8 +23,6 @@ phases:
       - npm run tslint:ci
       - node sonarqube-scan.js
       - echo Build completed on `date`
-      # TODO deploy to EC2
-      # Check if xml test format is compatible with aws
 
 reports: #New
   CoverageReports: # CodeBuild will create a report group called "CoverageReports".
