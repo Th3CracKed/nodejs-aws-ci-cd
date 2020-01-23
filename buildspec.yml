@@ -33,4 +33,5 @@ artifacts:
   files:
     - "dist/**/*"
     - "coverage/**/*"
+    - "appspec.yml"
   base-directory: "."
