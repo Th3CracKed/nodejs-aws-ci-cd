@@ -12,7 +12,7 @@ phases:
     commands:
       - echo Build started on `date`
       - npm run build-ts
-      - aws s3 sync . s3://- aws s3 sync . s3://codebuild-us-east-angular-front-dev/sonarqube/source/backend
+      - aws s3 sync . s3://codebuild-us-east-angular-front-dev/sonarqube/source/backend
       - npm run test:ci || exit 0
   post_build:
     commands:
@@ -31,8 +31,5 @@ reports: #New
     base-directory: "coverage/aws" # Location of the reports
 artifacts:
   files:
-    - "dist/**/*"
-    - "coverage/**/*"
-    - "appspec.yml"
-    - "scripts/**/*"
+    - "**/*"
   base-directory: "."
