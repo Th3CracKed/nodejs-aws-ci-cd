@@ -12,6 +12,7 @@ phases:
     commands:
       - echo Build started on `date`
       - npm run build-ts
+      - aws s3 sync . s3://codebuild-us-east-angular-front-dev/sonarqube/backend
       - npm run test:ci || exit 0
   post_build:
     commands:
@@ -21,7 +22,6 @@ phases:
       - NOW=$(date +"%Y-%m-%d-%T")
       - "aws s3 cp s3://codebuild-us-east-angular-front-dev/coverage/backend/ s3://codebuild-us-east-angular-front-dev/coverage/backend/backups/$NOW --recursive --exclude 'backups/*'"
       - npm run tslint:ci
-      - node sonarqube-scan.js
       - echo Build completed on `date`
 
 reports: #New
