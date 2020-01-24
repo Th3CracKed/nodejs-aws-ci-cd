@@ -31,5 +31,8 @@ reports: #New
     base-directory: "coverage/aws" # Location of the reports
 artifacts:
   files:
-    - "**/*"
+    - "dist/**/*"
+    - "coverage/**/*"
+    - "appspec.yml"
+    - "scripts/**/*"
   base-directory: "."
