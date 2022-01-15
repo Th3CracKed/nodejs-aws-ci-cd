@@ -41,7 +41,7 @@
         "jest-junit": "^10.0.0",
         "jest-sonar-reporter": "^2.0.0",
         "nodemon": "^1.19.2",
-        "shelljs": "^0.8.3",
+        "shelljs": "^0.8.5",
         "sonarqube-scanner": "^2.5.0",
         "supertest": "^4.0.2",
         "ts-jest": "^24.1.0",
